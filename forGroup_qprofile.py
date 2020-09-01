@@ -453,7 +453,7 @@ if __name__ == '__main__':
         parser.add_argument('-RIN', action='store', dest='RIN', default=100.)
         parser.add_argument('-ROUT', action='store', dest='ROUT', default=5000.)
         parser.add_argument('-theta', action='store', dest='theta', default='theta_sat_w1')
-        parser.add_argument('-nbins', action='store', dest='nbins', default=15)
+        parser.add_argument('-nbins', action='store', dest='nbins', default=10)
         parser.add_argument('-ncores', action='store', dest='ncores', default=10)
         parser.add_argument('-h_cosmo', action='store', dest='h_cosmo', default=0.7)
         args = parser.parse_args()
