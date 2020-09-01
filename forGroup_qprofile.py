@@ -188,23 +188,21 @@ def partial_profile_unpack(minput):
 def main(sample='pru',l_min=20.,l_max=150.,
                 z_min = 0.1, z_max = 0.4,
                 RIN = 100., ROUT =5000.,
-                proxy_angle = 'theta_sat_w1',ndots= 10,ncores=10,h=1.):
+                proxy_angle = 'theta_sat_w1',
+                ndots= 10,ncores=10,h=0.7):
 
         '''
         
         INPUT
         ---------------------------------------------------------
         sample         (str) sample name
-        N_min          (int) lower limit of galaxy members - >=
-        N_max          (int) higher limit of galaxy members - <
+        l_min          (int) lower limit of galaxy members - >=
+        l_max          (int) higher limit of galaxy members - <
         z_min          (float) lower limit for z - >=
         z_max          (float) higher limit for z - <
-        conmin         (float) lower limit for C_BG - >=
-        conmax         (float) higher limit for C_BG - <
-        lMHmin         (float) lower limit for log(MHALO) - >=
-        lMHmax         (float) higher limit for log(MHALO) - <        
         RIN            (float) Inner bin radius of profile
         ROUT           (float) Outer bin radius of profile
+        proxy_angle    (str) proxy definition of the angle to compute the quadrupole
         ndots          (int) Number of bins of the profile
         ncores         (int) to run in parallel, number of cores
         h              (float) H0 = 100.*h
@@ -452,13 +450,12 @@ if __name__ == '__main__':
         parser.add_argument('-l_max', action='store', dest='l_max', default=150)
         parser.add_argument('-z_min', action='store', dest='z_min', default=0.1)
         parser.add_argument('-z_max', action='store', dest='z_max', default=0.4)
-        parser.add_argument('-ODDS_min', action='store', dest='ODDS_min', default=0.5)
         parser.add_argument('-RIN', action='store', dest='RIN', default=100.)
         parser.add_argument('-ROUT', action='store', dest='ROUT', default=5000.)
         parser.add_argument('-theta', action='store', dest='theta', default='theta_sat_w1')
         parser.add_argument('-nbins', action='store', dest='nbins', default=15)
         parser.add_argument('-ncores', action='store', dest='ncores', default=10)
-        parser.add_argument('-h_cosmo', action='store', dest='h_cosmo', default=1.)
+        parser.add_argument('-h_cosmo', action='store', dest='h_cosmo', default=0.7)
         args = parser.parse_args()
         
         sample     = args.sample
@@ -466,7 +463,6 @@ if __name__ == '__main__':
         l_max      = int(args.l_max) 
         z_min      = float(args.z_min) 
         z_max      = float(args.z_max) 
-        ODDS_min   = float(args.ODDS_min)
         RIN        = float(args.RIN)
         ROUT       = float(args.ROUT)
         theta      = args.theta
