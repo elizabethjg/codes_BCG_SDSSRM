@@ -2,7 +2,7 @@
 #SBATCH --job-name=theta_sat_w1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=50
-#SBATCH --time=12:00:00
+#SBATCH --time=1:00:00
 ## An email is sent when the job is canceled or finished
 ## Change "root" for your e-mail address
 #SBATCH --mail-type=FAIL,END
