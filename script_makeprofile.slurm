@@ -16,6 +16,6 @@ cd /mnt/clemente/lensing/RodriguezGroups/codes_RGroups/
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-conda activate py2env
+conda activate py3env
 
 srun python -u forGroup_qprofile.py -sample $SLURM_JOB_NAME -theta $SLURM_JOB_NAME -ncores 50
