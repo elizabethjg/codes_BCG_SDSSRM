@@ -33,12 +33,15 @@ def partial_profile(backcat_ids,RA0,DEC0,Z,pangle,
 
         
         
-        backcat = S.loc[backcat_ids]
-        
+        backcat     = S.loc[backcat_ids]
+        backcat.Z_B = np.round(backcat.Z_B,2)
         ndots = int(ndots)
-               
-        mask = backcat.Z_B > (Z + 0.1)
         
+        if 'KiDS' in np.array(backcat.CATNAME)[0]:
+                mask = (backcat.Z_B > (Z + 0.1))*(backcat.ODDS >= 0.5)*(backcat.Z_B < 0.9)
+        else:
+                mask = (backcat.Z_B > (Z + 0.1))*(backcat.ODDS >= 0.5)
+                
         catdata = backcat[mask]
 
 
@@ -184,7 +187,7 @@ def partial_profile_unpack(minput):
 
 def main(sample='pru',l_min=20.,l_max=150.,
                 z_min = 0.1, z_max = 0.4,
-                odds_min=0.5, RIN = 100., ROUT =5000.,
+                RIN = 100., ROUT =5000.,
                 proxy_angle = 'theta_sat_w1',ndots= 10,ncores=10,h=1.):
 
         '''
@@ -200,7 +203,6 @@ def main(sample='pru',l_min=20.,l_max=150.,
         conmax         (float) higher limit for C_BG - <
         lMHmin         (float) lower limit for log(MHALO) - >=
         lMHmax         (float) higher limit for log(MHALO) - <        
-        odds_min       (float) cut in odds
         RIN            (float) Inner bin radius of profile
         ROUT           (float) Outer bin radius of profile
         ndots          (int) Number of bins of the profile
@@ -215,8 +217,6 @@ def main(sample='pru',l_min=20.,l_max=150.,
         print('Selecting groups with:')
         print(l_min,' <= Lambda < ',l_max)
         print(z_min,' <= z < ',z_max)
-        print('Background galaxies with:')
-        print('ODDS > ',odds_min)
         print('Profile has ',ndots,'bins')
         print('from ',RIN,'kpc to ',ROUT,'kpc')
         print('Angle proxy ',proxy_angle)
@@ -387,7 +387,7 @@ def main(sample='pru',l_min=20.,l_max=150.,
         
         # AVERAGE LENS PARAMETERS
         
-        zmean        = np.average(L.Z_lambda,weights=Ntot)
+        zmean        = np.average(L.Z_LAMBDA,weights=Ntot)
         l_mean       = np.average(L.LAMBDA,weights=Ntot)
         
         # FITING AN NFW MODEL
@@ -475,6 +475,6 @@ if __name__ == '__main__':
         h          = float(args.h_cosmo)
         
 	main(sample,l_min,l_max, z_min, z_max,
-                ODDS_min, RIN, ROUT,theta,ndots,ncores,h)
+                RIN, ROUT,theta,ndots,ncores,h)
                 
 
