@@ -147,7 +147,7 @@ if cont:
 else:
     sampler.run_mcmc(pos, nit, progress=True)
 
-print (time.time()-t1)/60.
+print((time.time()-t1)/60.)
 
 #-------------------
 # saving mcmc out
