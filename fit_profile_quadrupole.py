@@ -45,12 +45,12 @@ rin = float(args.RIN)
 rout = float(args.ROUT)
 
 if miss:
-	outfile = folder+'quadrupole_bcg_'+component+'_miss_' + \
+	outfile = folder+'quadrupole_'+component+'_miss_' + \
 	    file_name[:-5]+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
 	backup = folder+'backup_bcg_'+component+'_miss_' + \
 	    file_name[:-5]+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
 else:
-	outfile = folder+'quadrupole_bcg_'+component+'_' + \
+	outfile = folder+'quadrupole_'+component+'_' + \
 	    file_name[:-5]+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
 	backup = folder+'backup_bcg_'+component+'_'+file_name[:-5]+ \
 	    '_'+str(int(rin))+'_'+str(int(rout))+'.out'
@@ -116,9 +116,8 @@ nwalkers, ndim = pos.shape
 #-------------------
 # running emcee
 
-profile = fits.open(folder+'profile_bcg_'+sample_name+'.fits')[1].data
-maskr = (profile.Rp > (rin/1000.))*(profile.Rp < (rout/1000.))
-profile = profile[maskr]
+maskr = (p.Rp > (rin/1000.))*(p.Rp < (rout/1000.))
+profile = p[maskr]
 
 t1 = time.time()
 
