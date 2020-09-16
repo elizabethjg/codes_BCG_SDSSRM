@@ -12,7 +12,7 @@ from astropy.io import fits
 folder = '/mnt/clemente/lensing/redMaPPer/compressed/'
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-sample', action='store', dest='sample', default='total')
+parser.add_argument('-file_name', action='store', dest='file_name', default='profile.fits')
 parser.add_argument('-ncores', action='store', dest='ncores', default=15)
 parser.add_argument('-misscentred', action='store',
                     dest='miss', default='False')
@@ -24,7 +24,7 @@ parser.add_argument('-nit', action='store', dest='nit', default=250)
 parser.add_argument('-continue', action='store', dest='cont', default='False')
 args = parser.parse_args()
 
-sample_name = args.sample
+file_name = args.file_name
 
 if 'True' in args.miss:
 	miss = True
@@ -57,7 +57,7 @@ else:
 
 
 print('fitting quadrupole')
-print(sample_name)
+print(file_name)
 print('miss = ', miss)
 print(component)
 print('ncores = ', ncores)
@@ -68,12 +68,13 @@ print('continue', cont)
 print('outfile', outfile)
 
 
-f = open(folder+'profile_'+sample_name+'.cat', 'r')
-lines = f.readlines()
-j = lines[2].find('=')+1
-zmean = float(lines[2][j:-2])
-pcc = float((lines[-1][1:-2]))
-M200 = float((lines[-2][1:-2]))*1.e14
+profile = fits.open(folder+file_name)
+h       = profile[1].header
+p       = profile[1].data
+zmean   = h['Z_MEAN']    
+M200    = 10**h['lM200']
+pcc     = h['pcc']
+
 
 print('M200', M200)
 print('pcc', pcc)
@@ -128,17 +129,17 @@ if not cont:
 
 if component == 'tcos':
 	sampler = emcee.EnsembleSampler(nwalkers, ndim, log_probability,
-                                    args=(profile.Rp, profile.GAMMA_Tcos,
-                                    profile.error_GAMMA_Tcos),backend=backend)
+                                    args=(p.Rp, p.GAMMA_Tcos, p.error_GAMMA_Tcos),
+				    backend=backend)
 elif component == 'xsin':
 	sampler = emcee.EnsembleSampler(nwalkers, ndim, log_probability,
-                                    args=(profile.Rp, profile.GAMMA_Xsin,
-                                    profile.error_GAMMA_Xsin),backend=backend)
+                                    args=(p.Rp, p.GAMMA_Xsin,p.error_GAMMA_Xsin),
+                                    backend=backend)
 elif component == 'both':
     sampler = emcee.EnsembleSampler(nwalkers, ndim, log_probability,
-                                    args=(np.append(profile.Rp, profile.Rp),
-                                    np.append(profile.GAMMA_Tcos, profile.GAMMA_Xsin),
-                                    np.append(profile.error_GAMMA_Tcos,profile.error_GAMMA_Xsin)),
+                                    args=(np.append(p.Rp, p.Rp),
+                                    np.append(p.GAMMA_Tcos, p.GAMMA_Xsin),
+                                    np.append(p.error_GAMMA_Tcos,p.error_GAMMA_Xsin)),
                                     backend=backend)
 
 

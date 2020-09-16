@@ -1,6 +1,7 @@
 import sys
 sys.path.append('/mnt/clemente/lensing')
 sys.path.append('/mnt/clemente/lensing/lens_codes_v3.7')
+sys.path.append('/home/eli/lens_codes_v3.7')
 import time
 import numpy as np
 from lensing37 import gentools
@@ -46,9 +47,9 @@ def partial_profile(backcat_ids,RA0,DEC0,Z,pangle,
 
 
         dl, ds, dls = gentools.compute_lensing_distances(np.array([Z]), catdata.Z_B, precomputed=True)
-        dl  = (dl/0.7)*h
-        ds  = (ds/0.7)*h
-        dls = (dls/0.7)*h
+        dl  = (dl*0.7)/h
+        ds  = (ds*0.7)/h
+        dls = (dls*0.7)/h
         
         KPCSCALE   = dl*(((1.0/3600.0)*np.pi)/180.0)*1000.0
         BETA_array = dls/ds
@@ -115,17 +116,7 @@ def partial_profile(backcat_ids,RA0,DEC0,Z,pangle,
         BOOTwsum_Xsin  = np.zeros((nboot,ndots))
         BOOTwsum_cos   = np.zeros((nboot,ndots))
         BOOTwsum_sin   = np.zeros((nboot,ndots))
-        
-        GAMMATcos_wsum_c = []
-        GAMMAXsin_wsum_c = []
-        WEIGHTcos_sum_c  = []
-        WEIGHTsin_sum_c  = []
-        
-        BOOTwsum_Tcos_c  = np.zeros((nboot,ndots))
-        BOOTwsum_Xsin_c  = np.zeros((nboot,ndots))
-        BOOTwsum_cos_c   = np.zeros((nboot,ndots))
-        BOOTwsum_sin_c   = np.zeros((nboot,ndots))        
-        
+               
         for nbin in range(ndots):
                 mbin = dig == nbin+1              
                 
@@ -139,10 +130,6 @@ def partial_profile(backcat_ids,RA0,DEC0,Z,pangle,
                 WEIGHTcos_sum  = np.append(WEIGHTcos_sum,((np.cos(2.*at[mbin])**2)*peso[mbin]).sum())
                 WEIGHTsin_sum  = np.append(WEIGHTsin_sum,((np.sin(2.*at[mbin])**2)*peso[mbin]).sum())
                                
-                GAMMATcos_wsum_c = np.append(GAMMATcos_wsum_c,(et[mbin]*np.cos(2.*theta_ra[mbin])*peso[mbin]).sum())
-                GAMMAXsin_wsum_c = np.append(GAMMAXsin_wsum_c,(ex[mbin]*np.sin(2.*theta_ra[mbin])*peso[mbin]).sum())
-                WEIGHTcos_sum_c  = np.append(WEIGHTcos_sum_c,((np.cos(2.*theta_ra[mbin])**2)*peso[mbin]).sum())
-                WEIGHTsin_sum_c  = np.append(WEIGHTsin_sum_c,((np.sin(2.*theta_ra[mbin])**2)*peso[mbin]).sum())
                 
                 index = np.arange(mbin.sum())
                 if mbin.sum() == 0:
@@ -160,23 +147,14 @@ def partial_profile(backcat_ids,RA0,DEC0,Z,pangle,
                         BOOTwsum_cos[:,nbin]  = np.sum(np.array(peso[mbin]*(np.cos(2.*at[mbin])**2))[INDEX],axis=1)
                         BOOTwsum_sin[:,nbin]  = np.sum(np.array(peso[mbin]*(np.sin(2.*at[mbin])**2))[INDEX],axis=1)
 
-                        BOOTwsum_Tcos_c[:,nbin] = np.sum(np.array(et[mbin]*np.cos(2.*theta_ra[mbin])*peso[mbin])[INDEX],axis=1)
-                        BOOTwsum_Xsin_c[:,nbin] = np.sum(np.array(ex[mbin]*np.sin(2.*theta_ra[mbin])*peso[mbin])[INDEX],axis=1)
-                        BOOTwsum_cos_c[:,nbin]  = np.sum(np.array(peso[mbin]*(np.cos(2.*theta_ra[mbin])**2))[INDEX],axis=1)
-                        BOOTwsum_sin_c[:,nbin]  = np.sum(np.array(peso[mbin]*(np.sin(2.*theta_ra[mbin])**2))[INDEX],axis=1)
-
         
         output = {'DSIGMAwsum_T':DSIGMAwsum_T,'DSIGMAwsum_X':DSIGMAwsum_X,
                    'WEIGHTsum':WEIGHTsum, 'Mwsum':Mwsum, 
                    'BOOTwsum_T':BOOTwsum_T, 'BOOTwsum_X':BOOTwsum_X, 'BOOTwsum':BOOTwsum,
                    'GAMMATcos_wsum': GAMMATcos_wsum, 'GAMMAXsin_wsum': GAMMAXsin_wsum,
                    'WEIGHTcos_sum': WEIGHTcos_sum, 'WEIGHTsin_sum': WEIGHTsin_sum,
-                   'GAMMATcos_wsum_c': GAMMATcos_wsum_c, 'GAMMAXsin_wsum_c': GAMMAXsin_wsum_c,
-                   'WEIGHTcos_sum_c': WEIGHTcos_sum_c, 'WEIGHTsin_sum_c': WEIGHTsin_sum_c,
                    'BOOTwsum_Tcos':BOOTwsum_Tcos, 'BOOTwsum_Xsin':BOOTwsum_Xsin, 
                    'BOOTwsum_cos':BOOTwsum_cos, 'BOOTwsum_sin':BOOTwsum_sin, 
-                   'BOOTwsum_Tcos_c':BOOTwsum_Tcos, 'BOOTwsum_Xsin_c':BOOTwsum_Xsin, 
-                   'BOOTwsum_cos_c':BOOTwsum_cos, 'BOOTwsum_sin_c':BOOTwsum_sin, 
                    'Ntot':Ntot}
         
         return output
@@ -257,7 +235,11 @@ def main(sample='pru',l_min=20.,l_max=150.,
         # theta  = A.theta[mlenses]
         
         L = L[mlenses]
-        theta  = angles[mlenses][proxy_angle]
+        
+        if not 'control' in proxy_angle:
+                theta  = np.zeros(mlenses)
+        else:
+                theta  = angles[mlenses][proxy_angle]
         
         # SPLIT LENSING CAT
         
@@ -288,15 +270,6 @@ def main(sample='pru',l_min=20.,l_max=150.,
         BOOTwsum_cos   = np.zeros((100,ndots))
         BOOTwsum_sin   = np.zeros((100,ndots))
         
-        GAMMATcos_wsum_c = np.zeros(ndots)
-        GAMMAXsin_wsum_c = np.zeros(ndots)
-        WEIGHTcos_sum_c  = np.zeros(ndots)
-        WEIGHTsin_sum_c  = np.zeros(ndots)
-        
-        BOOTwsum_Tcos_c  = np.zeros((100,ndots))
-        BOOTwsum_Xsin_c  = np.zeros((100,ndots))
-        BOOTwsum_cos_c   = np.zeros((100,ndots))
-        BOOTwsum_sin_c   = np.zeros((100,ndots))        
         
         Ntot         = []
         tslice       = np.array([])
@@ -349,15 +322,6 @@ def main(sample='pru',l_min=20.,l_max=150.,
                         BOOTwsum_cos   += profilesums['BOOTwsum_cos']
                         BOOTwsum_sin   += profilesums['BOOTwsum_sin'] 
                         
-                        GAMMATcos_wsum_c += profilesums['GAMMATcos_wsum_c']
-                        GAMMAXsin_wsum_c += profilesums['GAMMAXsin_wsum_c']
-                        WEIGHTcos_sum_c  += profilesums['WEIGHTcos_sum_c'] 
-                        WEIGHTsin_sum_c  += profilesums['WEIGHTsin_sum_c'] 
-                        
-                        BOOTwsum_Tcos_c  += profilesums['BOOTwsum_Tcos_c']
-                        BOOTwsum_Xsin_c  += profilesums['BOOTwsum_Xsin_c']
-                        BOOTwsum_cos_c   += profilesums['BOOTwsum_cos_c']
-                        BOOTwsum_sin_c   += profilesums['BOOTwsum_sin_c'] 
                         
                         Ntot         = np.append(Ntot,profilesums['Ntot'])
                 
@@ -381,11 +345,6 @@ def main(sample='pru',l_min=20.,l_max=150.,
         GAMMA_Xsin = (GAMMAXsin_wsum/WEIGHTsin_sum)/(1+Mcorr)
         eGAMMA_Tcos =  np.std((BOOTwsum_Tcos/BOOTwsum_cos),axis=0)/(1+Mcorr)
         eGAMMA_Xsin =  np.std((BOOTwsum_Xsin/BOOTwsum_sin),axis=0)/(1+Mcorr)
-
-        GAMMA_Tcos_c = (GAMMATcos_wsum_c/WEIGHTcos_sum_c)/(1+Mcorr)
-        GAMMA_Xsin_c = (GAMMAXsin_wsum_c/WEIGHTsin_sum_c)/(1+Mcorr)
-        eGAMMA_Tcos_c =  np.std((BOOTwsum_Tcos_c/BOOTwsum_cos_c),axis=0)/(1+Mcorr)
-        eGAMMA_Xsin_c =  np.std((BOOTwsum_Xsin_c/BOOTwsum_sin_c),axis=0)/(1+Mcorr)
 
         
         # AVERAGE LENS PARAMETERS
@@ -420,11 +379,7 @@ def main(sample='pru',l_min=20.,l_max=150.,
                 fits.Column(name='GAMMA_Tcos', format='D', array=GAMMA_Tcos),
                 fits.Column(name='error_GAMMA_Tcos', format='D', array=eGAMMA_Tcos),
                 fits.Column(name='GAMMA_Xsin', format='D', array=GAMMA_Xsin),
-                fits.Column(name='error_GAMMA_Xsin', format='D', array=eGAMMA_Xsin),
-                fits.Column(name='GAMMA_Tcos_c', format='D', array=GAMMA_Tcos_c),
-                fits.Column(name='error_GAMMA_Tcos_c', format='D', array=eGAMMA_Tcos_c),
-                fits.Column(name='GAMMA_Xsin_c', format='D', array=GAMMA_Xsin_c),
-                fits.Column(name='error_GAMMA_Xsin_c', format='D', array=eGAMMA_Xsin_c)])
+                fits.Column(name='error_GAMMA_Xsin', format='D', array=eGAMMA_Xsin)])
         
         h = tbhdu.header
         h.append(('N_LENSES',np.int(Nlenses)))
