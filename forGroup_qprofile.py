@@ -237,7 +237,8 @@ def main(sample='pru',l_min=20.,l_max=150.,
         L = L[mlenses]
         
         if not 'control' in proxy_angle:
-                theta  = np.zeros(mlenses)
+                theta  = np.zeros(sum(mlenses))
+                print('entro en control')
         else:
                 theta  = angles[mlenses][proxy_angle]
         
