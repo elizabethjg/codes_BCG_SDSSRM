@@ -3,11 +3,13 @@ from astropy.io import fits
 from astropy.coordinates import SkyCoord
 from astropy import units as u 
 
+clusters_full = fits.open('/mnt/clemente/lensing/redMaPPer/redmapper_dr8_public_v6.3_catalog_Expanded.fits')[1].data
 clusters = fits.open('/mnt/clemente/lensing/redMaPPer/compressed/gx_redMapper.fits')[1].data
 ang_sat  = fits.open('/mnt/clemente/lensing/redMaPPer/angles_redMapper_forprofile.fits')[1].data
 IDang = fits.open('/mnt/clemente/lensing/redMaPPer/redmapper_dr8_public_v6.3_catalog.fits')[1].data.ID
 
 IDc    = clusters.ID 
+IDf    = clusters_full.ID 
 mid    = np.in1d(IDang,IDc)
 sindex = np.argsort(IDc)
 
@@ -18,7 +20,11 @@ t_wd  = np.zeros(len(IDc))
 t_p   = np.zeros(len(IDc))
 t_pwl = np.zeros(len(IDc))
 t_pwd = np.zeros(len(IDc))
+pcen  = np.zeros(len(IDc))
+
 t_BG  = clusters.deVPhi_BG
+P_cen = (clusters_full.P_CEN).T[0]
+
 
 mneg        = t_BG < 0.
 t_BG[mneg]  = 360. + t_BG[mneg]  
@@ -29,6 +35,8 @@ mmas        = t_BG > 180.
 t_BG[mmas]  = t_BG[mmas] - 180.
 t_BG        = np.deg2rad(t_BG)
 
+
+pcen[sindex]  = P_cen[mid]
 ides[sindex]  = IDang[mid]
 t[sindex]     = ang_sat.theta[mid]
 t_wl[sindex]  = ang_sat.theta_wlum[mid]
@@ -39,6 +47,7 @@ t_pwd[sindex] = ang_sat.theta_pcut_wd[mid]
 
 tbhdu = fits.BinTableHDU.from_columns(
         [fits.Column(name='ID', format='K', array=ides),
+        fits.Column(name='P_cen', format='D', array=pcen),
         fits.Column(name='theta_sat_w1', format='D', array=t),
         fits.Column(name='theta_sat_wl', format='D', array=t_wl),
         fits.Column(name='theta_sat_wd', format='D', array=t_wd),
