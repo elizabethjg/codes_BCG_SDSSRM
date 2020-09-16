@@ -12,7 +12,7 @@ from astropy.io import fits
 folder = '/mnt/clemente/lensing/redMaPPer/compressed/'
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-file_name', action='store', dest='file_name', default='profile.fits')
+parser.add_argument('-file', action='store', dest='file_name', default='profile.fits')
 parser.add_argument('-ncores', action='store', dest='ncores', default=15)
 parser.add_argument('-misscentred', action='store',
                     dest='miss', default='False')
@@ -46,13 +46,13 @@ rout = float(args.ROUT)
 
 if miss:
 	outfile = folder+'quadrupole_bcg_'+component+'_miss_' + \
-	    sample_name+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
+	    file_name[:-5]+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
 	backup = folder+'backup_bcg_'+component+'_miss_' + \
-	    sample_name+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
+	    file_name[:-5]+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
 else:
 	outfile = folder+'quadrupole_bcg_'+component+'_' + \
-	    sample_name+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
-	backup = folder+'backup_bcg_'+component+'_'+sample_name + \
+	    file_name[:-5]+'_'+str(int(rin))+'_'+str(int(rout))+'.out'
+	backup = folder+'backup_bcg_'+component+'_'+file_name[:-5]+ \
 	    '_'+str(int(rin))+'_'+str(int(rout))+'.out'
 
 
