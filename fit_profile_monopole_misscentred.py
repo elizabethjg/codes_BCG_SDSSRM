@@ -16,7 +16,6 @@ parser.add_argument('-file', action='store', dest='file_name', default='profile.
 parser.add_argument('-ncores', action='store', dest='ncores', default=4)
 args = parser.parse_args()
 
-folder    = args.folder
 file_name = args.file_name
 ncores    = args.ncores
 ncores    = int(ncores)
