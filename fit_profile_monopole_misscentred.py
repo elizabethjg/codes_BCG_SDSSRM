@@ -86,9 +86,9 @@ f1.close()
 
 
 mcmc1 = (mcmc_out.T)[:,1500:]
-M200,pcc = np.median(mcmc1,axis=1)
+lM200,pcc = np.median(mcmc1,axis=1)
 
-h.append(('lM200',np.round(M200,4)))
+h.append(('lM200',np.round(lM200,4)))
 h.append(('pcc',np.round(pcc,4)))
 
 fits.writeto(folder+file_name, p, h, overwrite=True)
