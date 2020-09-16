@@ -117,7 +117,7 @@ nwalkers, ndim = pos.shape
 # running emcee
 
 maskr = (p.Rp > (rin/1000.))*(p.Rp < (rout/1000.))
-profile = p[maskr]
+p = p[maskr]
 
 t1 = time.time()
 
