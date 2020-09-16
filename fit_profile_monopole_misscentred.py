@@ -8,7 +8,7 @@ import emcee
 import time
 from multiprocessing import Pool
 import argparse
-
+from astropy.io import fits
 
 folder = '/mnt/clemente/lensing/redMaPPer/compressed/'
 parser = argparse.ArgumentParser()
