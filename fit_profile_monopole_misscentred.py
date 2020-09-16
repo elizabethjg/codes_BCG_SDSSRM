@@ -1,8 +1,6 @@
 import sys
-sys.path.append('/home/eli/Documentos/PostDoc/halo-elongation/multipole_density_profile')
 sys.path.append('/mnt/clemente/lensing/lens_codes_v3.7')
-sys.path.append('/home/elizabeth/multipole_density_profile')
-sys.path.append('/home/eli/Documentos/Astronomia/posdoc/halo-elongation/multipole_density_profile')
+sys.path.append('/home/eli/lens_codes_v3.7')
 import numpy as np
 from pylab import *
 from multipoles_shear import *
