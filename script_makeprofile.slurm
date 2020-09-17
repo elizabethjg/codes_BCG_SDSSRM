@@ -18,7 +18,7 @@ export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 conda activate py3env
 
-srun python -u forGroup_qprofile.py -sample 'pcut_bin1_w1'  -theta 'theta_sat_w1'   -ncores 56 -plim 0.9 -l_max 27.982
-srun python -u forGroup_qprofile.py -sample 'pcut_bin2_pw1' -theta 'theta_sat_pw1'  -ncores 56 -plim 0.9 -l_min 27.982
-srun python -u forGroup_qprofile.py -sample 'pcut_z1_w1'  -theta 'theta_sat_w1'   -ncores 56 -plim 0.9 -z_max 0.313
-srun python -u forGroup_qprofile.py -sample 'pcut_z2_pw1' -theta 'theta_sat_pw1'  -ncores 56 -plim 0.9 -z_min 0.313
+srun python -u forGroup_qprofile.py -sample 'pcut_bin1_pw1'  -theta 'theta_sat_w1'   -ncores 56 -plim 0.9 -l_max 27.982
+srun python -u forGroup_qprofile.py -sample 'pcut_bin2_w1' -theta 'theta_sat_pw1'  -ncores 56 -plim 0.9 -l_min 27.982
+srun python -u forGroup_qprofile.py -sample 'pcut_z1_pw1'  -theta 'theta_sat_w1'   -ncores 56 -plim 0.9 -z_max 0.313
+srun python -u forGroup_qprofile.py -sample 'pcut_z2_w1' -theta 'theta_sat_pw1'  -ncores 56 -plim 0.9 -z_min 0.313
