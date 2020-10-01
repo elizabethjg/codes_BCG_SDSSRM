@@ -2,6 +2,9 @@ import sys
 from astropy.io import fits
 from astropy.coordinates import SkyCoord
 from astropy import units as u 
+from astropy.cosmology import LambdaCDM
+cosmo = LambdaCDM(H0=70., Om0=0.3, Ode0=0.7)
+
 
 clusters_full = fits.open('/mnt/clemente/lensing/redMaPPer/redmapper_dr8_public_v6.3_catalog_Expanded.fits')[1].data
 clusters = fits.open('/mnt/clemente/lensing/redMaPPer/compressed/gx_redMapper.fits')[1].data
@@ -12,6 +15,18 @@ IDc    = clusters.ID
 IDf    = clusters_full.ID 
 mid    = np.in1d(IDang,IDc)
 sindex = np.argsort(IDc)
+
+# DISTANCIA AL VECINO
+
+RA  = clusters.RA
+DEC = clusters.DEC
+z   = clusters.Z_LAMBDA
+
+Dcosmo = cosmo.comoving_distance(z)
+catalog = SkyCoord(ra=RA*u.degree, dec=DEC*u.degree, distance=Dcosmo)
+idx, d2d, d3d = catalog.match_to_catalog_3d(catalog, nthneighbor=2)
+
+#--------------------------------
 
 ides  = np.zeros(len(IDc))
 t     = np.zeros(len(IDc))
@@ -48,6 +63,7 @@ t_pwd[sindex] = ang_sat.theta_pcut_wd[mid]
 tbhdu = fits.BinTableHDU.from_columns(
         [fits.Column(name='ID', format='K', array=ides),
         fits.Column(name='P_cen', format='D', array=pcen),
+        fits.Column(name='Rprox', format='D', array=np.array(d3d)),
         fits.Column(name='theta_sat_w1', format='D', array=t),
         fits.Column(name='theta_sat_wl', format='D', array=t_wl),
         fits.Column(name='theta_sat_wd', format='D', array=t_wd),

@@ -167,8 +167,8 @@ def main(sample='pru',l_min=20.,l_max=150.,
                 z_min = 0.1, z_max = 0.4,
                 RIN = 100., ROUT =5000.,
                 proxy_angle = 'theta_sat_w1',
-                plim = 0.,ndots= 10,
-                ncores=10,h=0.7):
+                plim = 0., Rn_min = 0., Rn_max = 1000.,
+                ndots= 10, ncores=10, h=0.7):
 
         '''
         
@@ -182,6 +182,9 @@ def main(sample='pru',l_min=20.,l_max=150.,
         RIN            (float) Inner bin radius of profile
         ROUT           (float) Outer bin radius of profile
         proxy_angle    (str) proxy definition of the angle to compute the quadrupole
+        plim           (float) Cut in centre probability - select clusters with Pcen > plim
+        Rn_min         (float) Mpc - Select clusters with a distance to their neirest neighbour >= Rn_min 
+        Rn_max         (float) Mpc - Select clusters with a distance to their neirest neighbour < Rn_max 
         ndots          (int) Number of bins of the profile
         ncores         (int) to run in parallel, number of cores
         h              (float) H0 = 100.*h
@@ -194,10 +197,11 @@ def main(sample='pru',l_min=20.,l_max=150.,
         print('Selecting groups with:')
         print(l_min,' <= Lambda < ',l_max)
         print(z_min,' <= z < ',z_max)
+        print(Rn_min,' <= Rprox < ',Rn_max)
+        print('P_cen lim ',plim)
         print('Profile has ',ndots,'bins')
         print('from ',RIN,'kpc to ',ROUT,'kpc')
         print('Angle proxy ',proxy_angle)
-        print('P_cen lim ',plim)
         print('h ',h)
               
         # Defining radial bins
@@ -216,13 +220,14 @@ def main(sample='pru',l_min=20.,l_max=150.,
         Z_c[Z_c<0] = zlambda[Z_c<0]
         L.Z_LAMBDA = Z_c
         Pcen       = angles.P_cen
-        
+        Rprox      = angles.Rprox
         
         mrich   = (L.LAMBDA >= l_min)*(L.LAMBDA < l_max)
         mz      = (L.Z_LAMBDA >= z_min)*(L.Z_LAMBDA < z_max)
         mborder = (~np.in1d(L.ID,borderid))
         mpcen   = (Pcen > plim)
-        mlenses = mrich*mz*mborder*mpcen
+        mprox   = (Rprox >= Rn_min)*(Rprox < Rn_max)
+        mlenses = mrich*mz*mborder*mpcen*mprox
         Nlenses = mlenses.sum()
 
         if Nlenses < ncores:
@@ -388,6 +393,9 @@ def main(sample='pru',l_min=20.,l_max=150.,
         h.append(('l_max',np.int(l_max)))
         h.append(('z_min',np.round(z_min,4)))
         h.append(('z_max',np.round(z_max,4)))
+        h.append(('Rn_min',np.round(Rn_min,4)))
+        h.append(('Rn_max',np.round(Rn_max,4)))
+        h.append(('plim',np.round(plim,4)))
         h.append(('lM200_NFW',np.round(np.log10(M200_NFW),4)))
         h.append(('elM200_NFW',np.round(le_M200,4)))
         h.append(('CHI2_NFW',np.round(nfw[2],4)))
@@ -415,6 +423,8 @@ if __name__ == '__main__':
         parser.add_argument('-ROUT', action='store', dest='ROUT', default=5000.)
         parser.add_argument('-theta', action='store', dest='theta', default='theta_sat_w1')
         parser.add_argument('-plim', action='store', dest='plim', default=0)
+        parser.add_argument('-Rn_min', action='store', dest='Rn_min', default=0)
+        parser.add_argument('-Rn_max', action='store', dest='Rn_max', default=1000)
         parser.add_argument('-nbins', action='store', dest='nbins', default=10)
         parser.add_argument('-ncores', action='store', dest='ncores', default=10)
         parser.add_argument('-h_cosmo', action='store', dest='h_cosmo', default=0.7)
@@ -429,8 +439,10 @@ if __name__ == '__main__':
         ROUT       = float(args.ROUT)
         theta      = args.theta
         plim       = float(args.plim)
+        Rn_min     = float(args.Rn_min)
+        Rn_max     = float(args.Rn_max)
         nbins      = int(args.nbins)
         ncores     = int(args.ncores)
         h          = float(args.h_cosmo)
         
-        main(sample,l_min,l_max, z_min, z_max, RIN, ROUT,theta,plim,nbins,ncores,h)
+        main(sample,l_min,l_max, z_min, z_max, RIN, ROUT,theta,plim,Rn_min,R_max,nbins,ncores,h)
