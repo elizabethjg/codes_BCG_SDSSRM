@@ -11,11 +11,11 @@
 . /etc/profile
 source $HOME/.bashrc
 
-cd /mnt/clemente/lensing/codes_BCG_SDSSRM/
-
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 conda activate py3env
 
-srun python fit_profile_monopole_misscentred.py -file 'profile_'$SLURM_JOB_NAME'.fits' -ncores $SLURM_CPUS_PER_TASK
+cd /mnt/clemente/lensing/redMaPPer/compressed
+
+srun python /mnt/clemente/lensing/codes_BCG_SDSSRM/fit_profile_monopole_misscentred.py -file 'profile_'$SLURM_JOB_NAME'.fits' -ncores $SLURM_CPUS_PER_TASK
