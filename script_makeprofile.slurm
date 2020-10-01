@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=bcg
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=56
+#SBATCH --cpus-per-task=50
 #SBATCH --time=5:00:00
 ## An email is sent when the job is canceled or finished
 ## Change "root" for your e-mail address
@@ -18,10 +18,10 @@ export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 conda activate py3env
 
-srun python -u forGroup_qprofile.py -sample 'Rprox_min_w1'  -theta 'theta_sat_w1'  -ncores 56 -Rn_max 31.92894794
-srun python -u forGroup_qprofile.py -sample 'Rprox_min_pw1' -theta 'theta_sat_pw1' -ncores 56 -Rn_max 31.92894794
-srun python -u forGroup_qprofile.py -sample 'Rprox_max_w1'  -theta 'theta_sat_w1'  -ncores 56 -Rn_min 31.92894794
-srun python -u forGroup_qprofile.py -sample 'Rprox_max_pw1' -theta 'theta_sat_pw1' -ncores 56 -Rn_min 31.92894794
+srun python -u forGroup_qprofile.py -sample 'Rprox_min_w1'  -theta 'theta_sat_w1'  -ncores 50 -Rn_max 31.92894794
+srun python -u forGroup_qprofile.py -sample 'Rprox_min_pw1' -theta 'theta_sat_pw1' -ncores 50 -Rn_max 31.92894794
+srun python -u forGroup_qprofile.py -sample 'Rprox_max_w1'  -theta 'theta_sat_w1'  -ncores 50 -Rn_min 31.92894794
+srun python -u forGroup_qprofile.py -sample 'Rprox_max_pw1' -theta 'theta_sat_pw1' -ncores 50 -Rn_min 31.92894794
 
 ##srun python -u forGroup_qprofile.py -sample 'pcut_bin1_pw1'  -theta 'theta_sat_w1'   -ncores 56 -plim 0.9 -l_max 27.982
 ##srun python -u forGroup_qprofile.py -sample 'pcut_bin2_w1' -theta 'theta_sat_pw1'  -ncores 56 -plim 0.9 -l_min 27.982
