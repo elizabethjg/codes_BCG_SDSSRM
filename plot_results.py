@@ -56,45 +56,45 @@ epp   = np.append(epp,mcmc[1])
 e_epp = np.vstack((e_epp,np.diff(mcmc)))
 
 # pcut bin1 
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_w1_0_5000.out')[500:], [16, 50, 84])
-ep_b1   = mcmc[1]
-e_ep_b1 = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_w1_0_700.out')[500:], [16, 50, 84])
-ep_b1   = np.append(ep_b1,mcmc[1])
-e_ep_b1 = np.vstack((e_ep_b1,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_w1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_pw1_0_5000.out')[500:], [16, 50, 84])
+ep_b1   = mcmc[1]                                                  
+e_ep_b1 = np.diff(mcmc)                                            
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_pw1_0_700.out')[500:], [16, 50, 84])
+ep_b1   = np.append(ep_b1,mcmc[1])                                 
+e_ep_b1 = np.vstack((e_ep_b1,np.diff(mcmc)))                       
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_pw1_700_5000.out')[500:], [16, 50, 84])
 ep_b1   = np.append(ep_b1,mcmc[1])
 e_ep_b1 = np.vstack((e_ep_b1,np.diff(mcmc)))
 
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_pw1_0_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_w1_0_5000.out')[500:], [16, 50, 84])
 ep_b1p   = mcmc[1]
 e_ep_b1p = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_pw1_0_700.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_w1_0_700.out')[500:], [16, 50, 84])
 ep_b1p   = np.append(ep_b1p,mcmc[1])
 e_ep_b1p = np.vstack((e_ep_b1p,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_pw1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin1_w1_700_5000.out')[500:], [16, 50, 84])
 ep_b1p   = np.append(ep_b1p,mcmc[1])
 e_ep_b1p = np.vstack((e_ep_b1p,np.diff(mcmc)))
 
 #pcut bin2
 
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_w1_0_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_pw1_0_5000.out')[500:], [16, 50, 84])
 ep_b2   = mcmc[1]
 e_ep_b2 = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_w1_0_700.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_pw1_0_700.out')[500:], [16, 50, 84])
 ep_b2   = np.append(ep_b2,mcmc[1])
 e_ep_b2 = np.vstack((e_ep_b2,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_w1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_pw1_700_5000.out')[500:], [16, 50, 84])
 ep_b2   = np.append(ep_b2,mcmc[1])
 e_ep_b2 = np.vstack((e_ep_b2,np.diff(mcmc)))
 
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_pw1_0_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_w1_0_5000.out')[500:], [16, 50, 84])
 ep_b2p   = mcmc[1]
 e_ep_b2p = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_pw1_0_700.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_w1_0_700.out')[500:], [16, 50, 84])
 ep_b2p   = np.append(ep_b2p,mcmc[1])
 e_ep_b2p = np.vstack((e_ep_b2p,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_pw1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_bin2_w1_700_5000.out')[500:], [16, 50, 84])
 ep_b2p   = np.append(ep_b2p,mcmc[1])
 e_ep_b2p = np.vstack((e_ep_b2p,np.diff(mcmc)))
 
