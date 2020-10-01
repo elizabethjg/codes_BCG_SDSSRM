@@ -1,5 +1,6 @@
 import sys
 sys.path.append('/mnt/clemente/lensing/lens_codes_v3.7')
+sys.path.append('/home/elizabeth/lens_codes_v3.7')
 import numpy as np
 from pylab import *
 from multipoles_shear import *
@@ -9,7 +10,8 @@ from multiprocessing import Pool
 import argparse
 from astropy.io import fits
 
-folder = '/mnt/clemente/lensing/redMaPPer/compressed/'
+# folder = '/mnt/clemente/lensing/redMaPPer/compressed/'
+folder = './'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-file', action='store', dest='file_name', default='profile.fits')
