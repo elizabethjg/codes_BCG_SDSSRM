@@ -12,7 +12,7 @@ cd /home/elizabeth/profiles_redMapper/
 
 export OMP_NUM_THREADS=10
 
-module load softwares/anaconda2/5.0-intel-2018.0
+module load softwares/anaconda3/5.0-intel-2018.0
 source activate py3env
 
 
