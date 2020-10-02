@@ -3,7 +3,7 @@ sys.path.append('/mnt/clemente/lensing/lens_codes_v3.7')
 sys.path.append('/home/eli/lens_codes_v3.7')
 sys.path.append('/home/elizabeth/lens_codes_v3.7')
 import numpy as np
-from pylab import *
+#from pylab import *
 from multipoles_shear import *
 import emcee
 import time

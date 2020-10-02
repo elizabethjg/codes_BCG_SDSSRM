@@ -16,6 +16,6 @@ export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 conda activate py3env
 
-cd /mnt/clemente/lensing/redMaPPer/compressed
+cd /mnt/clemente/lensing/redMaPPer/compressed/
 
 srun python /mnt/clemente/lensing/codes_BCG_SDSSRM/fit_profile_monopole_misscentred.py -file 'profile_'$SLURM_JOB_NAME'.fits' -ncores $SLURM_CPUS_PER_TASK

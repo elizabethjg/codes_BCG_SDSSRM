@@ -252,25 +252,25 @@ plt.errorbar(eb[mtotal*mt],ep,yerr=e_ep.T,xerr=e_eb[:,mtotal*mt],fmt='none',ecol
 plt.plot(eb[mtotal*mtp],epp,'C3o')
 plt.errorbar(eb[mtotal*mtp],epp,yerr=e_epp.T,xerr=e_eb[:,mtotal*mtp],fmt='none',ecolor='C3')
 
-plt.plot(eb[mmbin1*mt],ep_b1,'C4o')
-plt.errorbar(eb[mmbin1*mt],ep_b1,yerr=e_ep_b1.T,xerr=e_eb[:,mmbin1*mt],fmt='none',ecolor='C4')
-plt.plot(eb[mmbin1*mtp],ep_b1p,'C4o')
-plt.errorbar(eb[mmbin1*mtp],ep_b1p,yerr=e_ep_b1p.T,xerr=e_eb[:,mmbin1*mtp],fmt='none',ecolor='C4')
+# plt.plot(eb[mmbin1*mt],ep_b1,'C4o')
+# plt.errorbar(eb[mmbin1*mt],ep_b1,yerr=e_ep_b1.T,xerr=e_eb[:,mmbin1*mt],fmt='none',ecolor='C4')
+# plt.plot(eb[mmbin1*mtp],ep_b1p,'C4o')
+# plt.errorbar(eb[mmbin1*mtp],ep_b1p,yerr=e_ep_b1p.T,xerr=e_eb[:,mmbin1*mtp],fmt='none',ecolor='C4')
 
-plt.plot(eb[mmbin2*mt],ep_b2,'C1o')
-plt.errorbar(eb[mmbin2*mt],ep_b2,yerr=e_ep_b2.T,xerr=e_eb[:,mmbin2*mt],fmt='none',ecolor='C1')
-plt.plot(eb[mmbin2*mtp],ep_b2p,'C1o')
-plt.errorbar(eb[mmbin2*mtp],ep_b2p,yerr=e_ep_b2p.T,xerr=e_eb[:,mmbin2*mtp],fmt='none',ecolor='C1')
+# plt.plot(eb[mmbin2*mt],ep_b2,'C1o')
+# plt.errorbar(eb[mmbin2*mt],ep_b2,yerr=e_ep_b2.T,xerr=e_eb[:,mmbin2*mt],fmt='none',ecolor='C1')
+# plt.plot(eb[mmbin2*mtp],ep_b2p,'C1o')
+# plt.errorbar(eb[mmbin2*mtp],ep_b2p,yerr=e_ep_b2p.T,xerr=e_eb[:,mmbin2*mtp],fmt='none',ecolor='C1')
 
-# plt.plot(eb[mmz1*mt],ep_z1,'C0o')
-# plt.errorbar(eb[mmz1*mt],ep_z1,yerr=e_ep_z1.T,xerr=e_eb[:,mmz1*mt],fmt='none',ecolor='C0')
-# plt.plot(eb[mmz1*mtp],ep_z1p,'C0o')
-# plt.errorbar(eb[mmz1*mtp],ep_z1p,yerr=e_ep_z1p.T,xerr=e_eb[:,mmz1*mtp],fmt='none',ecolor='C0')
+plt.plot(eb[mmz1*mt],ep_z1,'C0o')
+plt.errorbar(eb[mmz1*mt],ep_z1,yerr=e_ep_z1.T,xerr=e_eb[:,mmz1*mt],fmt='none',ecolor='C0')
+plt.plot(eb[mmz1*mtp],ep_z1p,'C0o')
+plt.errorbar(eb[mmz1*mtp],ep_z1p,yerr=e_ep_z1p.T,xerr=e_eb[:,mmz1*mtp],fmt='none',ecolor='C0')
 
-# plt.plot(eb[mmz2*mt],ep_z2,'C2o')
-# plt.errorbar(eb[mmz2*mt],ep_z2,yerr=e_ep_z2.T,xerr=e_eb[:,mmz2*mt],fmt='none',ecolor='C2')
-# plt.plot(eb[mmz2*mtp],ep_z2p,'C2o')
-# plt.errorbar(eb[mmz2*mtp],ep_z2p,yerr=e_ep_z2p.T,xerr=e_eb[:,mmz2*mtp],fmt='none',ecolor='C2')
+plt.plot(eb[mmz2*mt],ep_z2,'C2o')
+plt.errorbar(eb[mmz2*mt],ep_z2,yerr=e_ep_z2.T,xerr=e_eb[:,mmz2*mt],fmt='none',ecolor='C2')
+plt.plot(eb[mmz2*mtp],ep_z2p,'C2o')
+plt.errorbar(eb[mmz2*mtp],ep_z2p,yerr=e_ep_z2p.T,xerr=e_eb[:,mmz2*mtp],fmt='none',ecolor='C2')
 
 
 
