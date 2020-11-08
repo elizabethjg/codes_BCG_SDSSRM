@@ -100,47 +100,92 @@ e_ep_b2p = np.vstack((e_ep_b2p,np.diff(mcmc)))
 
 #pcut z1
 
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_w1_0_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_pw1_0_5000.out')[500:], [16, 50, 84])
 ep_z1   = mcmc[1]
 e_ep_z1 = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_w1_0_700.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_pw1_0_700.out')[500:], [16, 50, 84])
 ep_z1   = np.append(ep_z1,mcmc[1])
 e_ep_z1 = np.vstack((e_ep_z1,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_w1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_pw1_700_5000.out')[500:], [16, 50, 84])
 ep_z1   = np.append(ep_z1,mcmc[1])
 e_ep_z1 = np.vstack((e_ep_z1,np.diff(mcmc)))
 
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_pw1_0_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_w1_0_5000.out')[500:], [16, 50, 84])
 ep_z1p   = mcmc[1]
 e_ep_z1p = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_pw1_0_700.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_w1_0_700.out')[500:], [16, 50, 84])
 ep_z1p   = np.append(ep_z1p,mcmc[1])
 e_ep_z1p = np.vstack((e_ep_z1p,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_pw1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z1_w1_700_5000.out')[500:], [16, 50, 84])
 ep_z1p   = np.append(ep_z1p,mcmc[1])
 e_ep_z1p = np.vstack((e_ep_z1p,np.diff(mcmc)))
 
-#pcut z1
-
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_w1_0_5000.out')[500:], [16, 50, 84])
-ep_z2   = mcmc[1]
-e_ep_z2 = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_w1_0_700.out')[500:], [16, 50, 84])
-ep_z2   = np.append(ep_z2,mcmc[1])
-e_ep_z2 = np.vstack((e_ep_z2,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_w1_700_5000.out')[500:], [16, 50, 84])
-ep_z2   = np.append(ep_z2,mcmc[1])
-e_ep_z2 = np.vstack((e_ep_z2,np.diff(mcmc)))
+#pcut z2
 
 mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_pw1_0_5000.out')[500:], [16, 50, 84])
+ep_z2   = mcmc[1]
+e_ep_z2 = np.diff(mcmc)
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_pw1_0_700.out')[500:], [16, 50, 84])
+ep_z2   = np.append(ep_z2,mcmc[1])
+e_ep_z2 = np.vstack((e_ep_z2,np.diff(mcmc)))
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_pw1_700_5000.out')[500:], [16, 50, 84])
+ep_z2   = np.append(ep_z2,mcmc[1])
+e_ep_z2 = np.vstack((e_ep_z2,np.diff(mcmc)))
+
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_w1_0_5000.out')[500:], [16, 50, 84])
 ep_z2p   = mcmc[1]
 e_ep_z2p = np.diff(mcmc)
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_pw1_0_700.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_w1_0_700.out')[500:], [16, 50, 84])
 ep_z2p   = np.append(ep_z2p,mcmc[1])
 e_ep_z2p = np.vstack((e_ep_z2p,np.diff(mcmc)))
-mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_pw1_700_5000.out')[500:], [16, 50, 84])
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_pcut_z2_w1_700_5000.out')[500:], [16, 50, 84])
 ep_z2p   = np.append(ep_z2p,mcmc[1])
 e_ep_z2p = np.vstack((e_ep_z2p,np.diff(mcmc)))
+
+#Con vecinos
+
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_min_w1_0_5000.out')[500:], [16, 50, 84])
+eR1   = mcmc[1]
+e_eR1 = np.diff(mcmc)
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_min_w1_0_700.out')[500:], [16, 50, 84])
+eR1   = np.append(eR1,mcmc[1])
+e_eR1 = np.vstack((e_eR1,np.diff(mcmc)))
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_min_w1_700_5000.out')[500:], [16, 50, 84])
+eR1   = np.append(eR1,mcmc[1])
+e_eR1 = np.vstack((e_eR1,np.diff(mcmc)))
+
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_min_pw1_0_5000.out')[500:], [16, 50, 84])
+eR1p   = mcmc[1]
+e_eR1p = np.diff(mcmc)
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_min_pw1_0_700.out')[500:], [16, 50, 84])
+eR1p   = np.append(eR1p,mcmc[1])
+e_eR1p = np.vstack((e_eR1p,np.diff(mcmc)))
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_min_pw1_700_5000.out')[500:], [16, 50, 84])
+eR1p   = np.append(eR1p,mcmc[1])
+e_eR1p = np.vstack((e_eR1p,np.diff(mcmc)))
+
+# Aislados
+
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_max_w1_0_5000.out')[500:], [16, 50, 84])
+eR2   = mcmc[1]
+e_eR2 = np.diff(mcmc)
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_max_w1_0_700.out')[500:], [16, 50, 84])
+eR2   = np.append(eR2,mcmc[1])
+e_eR2 = np.vstack((e_eR2,np.diff(mcmc)))
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_max_w1_700_5000.out')[500:], [16, 50, 84])
+eR2   = np.append(eR2,mcmc[1])
+e_eR2 = np.vstack((e_eR2,np.diff(mcmc)))
+
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_max_pw1_0_5000.out')[500:], [16, 50, 84])
+eR2p   = mcmc[1]
+e_eR2p = np.diff(mcmc)
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_max_pw1_0_700.out')[500:], [16, 50, 84])
+eR2p   = np.append(eR2p,mcmc[1])
+e_eR2p = np.vstack((e_eR2p,np.diff(mcmc)))
+mcmc = np.percentile(np.loadtxt('quadrupole_both_profile_Rprox_max_pw1_700_5000.out')[500:], [16, 50, 84])
+eR2p   = np.append(eR2p,mcmc[1])
+e_eR2p = np.vstack((e_eR2p,np.diff(mcmc)))
+
 
 ##########################
 
@@ -236,6 +281,24 @@ mtpwd = np.array(mtpwd)
 mint  = (rout == 700)
 mext  = (rin == 700)
 mrtot = (rin == 0)*(rout == 5000)
+
+##################################
+# Aislados - no aislados
+##################################
+
+plt.figure()
+plt.plot(eb[mtotal*mt*mext],eR1[2],'C3o')
+plt.errorbar(eb[mtotal*mt*mext],eR1[2],yerr=e_eR1.T[0,2],xerr=e_eb[:,mtotal*mt*mext],fmt='none',ecolor='C3')
+plt.plot(eb[mtotal*mt*mext],eR2[2],'C0o')
+plt.errorbar(eb[mtotal*mt*mext],eR2[2],yerr=e_eR2.T[0,2],xerr=e_eb[:,mtotal*mt*mext],fmt='none',ecolor='C0')
+plt.plot([0.,0.4],[0.,0.4],'k--')
+
+plt.plot(eb[mtotal*mtp*mint],eR1p[1],'C3x')
+plt.errorbar(eb[mtotal*mtp*mint],eR1p[1],yerr=e_eR1p.T[0,1],xerr=e_eb[:,mtotal*mtp*mint],fmt='none',ecolor='C3')
+plt.plot(eb[mtotal*mtp*mint],eR2p[1],'C0x')
+plt.errorbar(eb[mtotal*mtp*mint],eR2p[1],yerr=e_eR2p.T[0,1],xerr=e_eb[:,mtotal*mtp*mint],fmt='none',ecolor='C0')
+plt.plot([0.,0.4],[0.,0.4],'k--')
+
 
 ##################################
 # with-without pcut
